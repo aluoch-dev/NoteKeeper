@@ -25,6 +25,7 @@ public class NoteActivity extends AppCompatActivity {
 
     public static final String NOTE_INFO = "com.jwhh.notekeeper.NOTE_INFO";
     private NoteInfo mNote;
+    private boolean mIsNewNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,9 @@ public class NoteActivity extends AppCompatActivity {
         EditText textNoteTitle = findViewById(R.id.text_note_title);
         EditText textNoteText = findViewById(R.id.text_note_text);
 
-        displayNote(spinnerCourses,textNoteTitle, textNoteText);
+        if(!mIsNewNote) {
+            displayNote(spinnerCourses,textNoteTitle, textNoteText);
+        }
 
     }
 
@@ -54,7 +57,7 @@ public class NoteActivity extends AppCompatActivity {
         List<CourseInfo> courses = DataManager.getInstance().getCourses();
         int courseIndex = courses.indexOf(mNote.getCourse());
         spinnerCourses.setSelection(courseIndex);
-        
+
         textNoteTitle.setText(mNote.getTitle());
         textNoteText.setText(mNote.getText());
     }
@@ -63,6 +66,8 @@ public class NoteActivity extends AppCompatActivity {
     private void readDisplayStateValues() {
         Intent intent = getIntent();
         mNote = intent.getParcelableExtra(NOTE_INFO);
+
+        mIsNewNote = mNote ==null;
 
     }
 
