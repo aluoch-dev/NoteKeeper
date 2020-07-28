@@ -40,7 +40,7 @@ public class NoteListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mAdapterNotes.notifyDataSetChanged();
+        mAdapterNotes.notifyDataSetChanged();;
     }
 
     private void initializeDisplayContent() {
